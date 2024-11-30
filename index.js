@@ -50,6 +50,7 @@ function setHeight() {
   const result =
     holder.offsetHeight / Math.round(parseFloat(img.style.height).toFixed(2));
   const percentage = result * 100;
+  rectangle.style.display = "flex";
   rectangle.innerHTML = `${percentage.toFixed(2)} %`; // Exibe a porcentagem de diferença
 }
 
