@@ -58,17 +58,17 @@ let isDragging = false;
 let startY;
 let initialTop;
 
-rectangle.addEventListener("mousedown", (e) => {
-  e.preventDefault();
+function startDrag(e) {
+  e.preventDefault(); // Previne seleção de texto ou outros comportamentos padrões
   isDragging = true;
-  startY = e.clientY;
+  startY = e.clientY || e.touches[0].clientY; // Usar a posição do toque
   initialTop = rectangle.offsetTop;
   rectangle.style.transition = "none"; // Remove transição durante o arraste
-});
+}
 
-document.addEventListener("mousemove", (e) => {
+function dragMove(e) {
   if (isDragging) {
-    const deltaY = e.clientY - startY;
+    const deltaY = (e.clientY || e.touches[0].clientY) - startY; // Para dispositivos móveis, usa touches
     let newTop = initialTop + deltaY;
 
     // Limite do contêiner
@@ -79,9 +79,19 @@ document.addEventListener("mousemove", (e) => {
     rectangle.style.top = newTop + 20 + "px";
     setHeight(); // Exibe a porcentagem de diferença
   }
-});
+}
 
-document.addEventListener("mouseup", () => {
+function stopDrag() {
   isDragging = false;
   rectangle.style.transition = "top 0.2s ease"; // Reaplica uma leve transição ao soltar
-});
+}
+
+// Eventos para desktop
+rectangle.addEventListener("mousedown", startDrag);
+document.addEventListener("mousemove", dragMove);
+document.addEventListener("mouseup", stopDrag);
+
+// Eventos para dispositivos móveis
+rectangle.addEventListener("touchstart", startDrag);
+document.addEventListener("touchmove", dragMove);
+document.addEventListener("touchend", stopDrag);
