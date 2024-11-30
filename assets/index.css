@@ -1,0 +1,38 @@
+body {
+  background-color: #232323;
+  color: #efefef;
+}
+
+input {
+  background-color: rgb(141, 141, 141);
+  padding: 5px;
+  border: white solid 2px;
+  border-radius: 5px;
+}
+
+#img-holder {
+  height: 50px;
+  overflow: hidden;
+}
+
+#img-square {
+  position: relative; /* Necessário para posicionar elementos internos */
+  width: 500px;
+  margin: 20px auto;
+}
+
+#img-holder img {
+  max-width: 100%;
+  height: auto;
+}
+
+#rectangle-image {
+  position: absolute; /* Necessário para manipular top */
+  width: 100%;
+  height: 20px;
+  background: rgba(120, 120, 120, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
